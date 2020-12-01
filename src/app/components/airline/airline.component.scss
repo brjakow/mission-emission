@@ -1,0 +1,41 @@
+.container {
+  padding: 20px 30px 40px 30px;
+}
+
+.error {
+  padding: 16px;
+  width: -webkit-fill-available;
+  color: white;
+  background-color: red;
+}
+
+.error-div {
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+h3 {
+  width: 500px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  padding-bottom: 20px;
+}
+
+mat-form-field {
+  padding-right: 30px;
+  margin: 0;
+  height: 51px;
+}
+
+button {
+  height: 50px;
+  width: 130px;
+}

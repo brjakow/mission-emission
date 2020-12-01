@@ -1,0 +1,65 @@
+<mat-tab-group (selectedTabChange)="update()">
+  <mat-tab label="Verbrauchsprüfung">
+    <div class="container">
+      <div class="row">
+        <h3>
+          <span>Dieses Jahr insgesamt verbrauchter Emmision in Tonnen: </span
+          >{{ totalConsumption }}
+        </h3>
+      </div>
+      <div class="row">
+        <h3>
+          <span>Noch durch Zertifikate gedeckte Emmision in Tonnen: </span
+          >{{ openConsumption }}
+        </h3>
+      </div>
+      <div class="row">
+        <h3><span>Zuletzt aktualisiert am: </span>{{ lastUpdate }}</h3>
+        <button mat-raised-button color="primary" (click)="newConsumption()">
+          Abfragen
+        </button>
+      </div>
+      <div *ngIf="warning" class="error-div">
+        <p class="error">
+          {{ warning }}
+        </p>
+      </div>
+    </div>
+  </mat-tab>
+  <mat-tab label="Handel">
+    <div class="container">
+      <div>
+        <h3 id="search">Wie viele Zertifikate möchten Sie kaufen:</h3>
+        <div class="search">
+          <mat-form-field appearance="fill">
+            <mat-label>Emission in Tonnen</mat-label>
+            <input matInput type="number" [(ngModel)]="buyValue" />
+          </mat-form-field>
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="buyCertificate(buyValue)"
+          >
+            Kaufen
+          </button>
+        </div>
+      </div>
+      <div>
+        <h3 id="search">Wie viele Zertifikate möchten Sie verkaufen:</h3>
+        <div class="search">
+          <mat-form-field appearance="fill">
+            <mat-label>Emission in Tonnen</mat-label>
+            <input matInput type="number" [(ngModel)]="sellValue" />
+          </mat-form-field>
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="sellCertificate(sellValue)"
+          >
+            Verkaufen
+          </button>
+        </div>
+      </div>
+    </div>
+  </mat-tab>
+</mat-tab-group>

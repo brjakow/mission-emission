@@ -1,0 +1,34 @@
+{
+  "airlines": [
+    {
+      "id": "resource:org.hackathon.Airline#10",
+      "name": "Lufthansa",
+      "totalConsumption": 80000,
+      "openConsumption": 10000
+    },
+
+    {
+      "id": "resource:org.hackathon.Airline#20",
+      "name": "Emirates",
+      "totalConsumption": 120000,
+      "openConsumption": 20000
+    }
+  ],
+  "stock": [
+    {
+      "id": "resource:org.hackathon.Stock#3",
+      "name": "EEX"
+    }
+  ],
+  "ca": [
+    {
+      "id": "resource:org.hackathon.CompetentAuthority#4",
+      "name": "EU"
+    }
+  ],
+  "noOpenConsumption": {
+    "name": "Lufthansa",
+    "totalConsumption": 80000,
+    "openConsumption": 0
+  }
+}

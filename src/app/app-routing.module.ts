@@ -1,23 +1,35 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
-import { HomeComponent } from './home';
-import { AuthGuard } from './_helpers';
-
-const accountModule = () => import('./account/account.module').then(x => x.AccountModule);
-const usersModule = () => import('./users/users.module').then(x => x.UsersModule);
+import { AirlineComponent } from './components/airline/airline.component';
+import { LoginComponent } from './components/login/login.component';
+import { CaComponent } from './components/ca/ca.component';
+import { VerifierComponent } from './components/verifier/verifier.component';
 
 const routes: Routes = [
-    { path: '', component: HomeComponent, canActivate: [AuthGuard] },
-    { path: 'users', loadChildren: usersModule, canActivate: [AuthGuard] },
-    { path: 'account', loadChildren: accountModule },
-
-    // otherwise redirect to home
-    { path: '**', redirectTo: '' }
+  {
+    path: 'login',
+    component: LoginComponent,
+  },
+  {
+    path: 'airline',
+    component: AirlineComponent,
+  },
+  {
+    path: 'ca',
+    component: CaComponent,
+  },
+  {
+    path: 'verifier',
+    component: VerifierComponent,
+  },
+  {
+    path: '**',
+    redirectTo: 'login',
+  },
 ];
 
 @NgModule({
-    imports: [RouterModule.forRoot(routes)],
-    exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

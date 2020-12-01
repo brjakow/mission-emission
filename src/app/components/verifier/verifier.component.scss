@@ -1,0 +1,44 @@
+.container {
+  padding: 0 30px 40px 30px;
+}
+
+table {
+  width: 100%;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  padding-bottom: 20px;
+}
+
+mat-divider {
+  margin-bottom: 20px;
+}
+
+mat-form-field {
+  padding-right: 30px;
+  margin: 0;
+  height: 51px;
+}
+
+button {
+  height: 50px;
+  width: 130px;
+}
+
+h3#search {
+  width: 300px;
+  margin: 0;
+}
+
+.error {
+  padding: 16px;
+  width: -webkit-fill-available;
+  color: white;
+  background-color: red;
+}
+
+.error-div {
+  margin-bottom: 30px;
+}

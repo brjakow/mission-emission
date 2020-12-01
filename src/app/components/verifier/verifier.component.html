@@ -1,0 +1,50 @@
+<div class="container">
+  <div *ngIf="error" class="error-div">
+    <p class="error">
+      {{ error }}
+    </p>
+  </div>
+  <div>
+    <h3>
+      <span>Dieses Jahr insgesamt verbrauchter Emmision in Tonnen: : </span
+      >{{ totalConsumption }}
+    </h3>
+  </div>
+  <div>
+    <h3>
+      <span>Noch offener Emmision in Tonnen: : </span>{{ openConsumption }}
+    </h3>
+  </div>
+  <div *ngIf="verifierWarning" class="error-div">
+    <p class="error">
+      {{ verifierWarning }}
+    </p>
+  </div>
+  <mat-divider></mat-divider>
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <ng-container matColumnDef="airlineID">
+      <th mat-header-cell *matHeaderCellDef>Id</th>
+      <td mat-cell *matCellDef="let element">{{ element.airlineID }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="emissionCapacity">
+      <th mat-header-cell *matHeaderCellDef>Emissionskapazität</th>
+      <td mat-cell *matCellDef="let element">{{ element.emissionCapacity }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="emissionComsumption">
+      <th mat-header-cell *matHeaderCellDef>Emmisionsverbrauch</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.emissionComsumption }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Name</th>
+      <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</div>
