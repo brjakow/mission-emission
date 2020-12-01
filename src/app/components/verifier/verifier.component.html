@@ -1,4 +1,14 @@
 <div class="container">
+  <div class="search">
+    <h3 id="search">Suche nach einer Fluggesellschaft</h3>
+    <mat-form-field appearance="fill">
+      <mat-label>Id der Fluggesellschaft</mat-label>
+      <input matInput type="text" [(ngModel)]="id" />
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="getAirlineById(id)">
+      Ausführen
+    </button>
+  </div>
   <div *ngIf="error" class="error-div">
     <p class="error">
       {{ error }}

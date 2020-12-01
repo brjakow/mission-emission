@@ -38,6 +38,11 @@ export class AirlineComponent implements OnInit {
     } else {
       this.getNewConsumption(this.id);
     }
+
+    if (this.openConsumption <= 0) {
+      this.warning =
+        'Ihre Emissionszertifikate sind aufgebraucht! Bitte erwerben Sie neue Zertifikate.';
+    }
   }
 
   newConsumption(): void {
