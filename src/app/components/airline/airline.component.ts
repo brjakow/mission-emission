@@ -9,6 +9,7 @@ import { DataService } from 'src/app/services/data.service';
 })
 export class AirlineComponent implements OnInit {
   airline: any;
+  id: string;
   mockData: any;
   user: string;
   buyValue: number;
@@ -24,25 +25,26 @@ export class AirlineComponent implements OnInit {
   ngOnInit(): void {
     this.user = this.data.getUser();
     if (this.user === 'Emirates') {
-      this.getNewConsumption('20');
+      this.id = '20';
     } else {
-      this.getNewConsumption('10');
+      this.id = '10';
     }
+    this.getNewConsumption(this.id);
   }
 
   update(): void {
     if (this.user === 'Emirates') {
-      this.getNewConsumption('20');
+      this.getNewConsumption(this.id);
     } else {
-      this.getNewConsumption('10');
+      this.getNewConsumption(this.id);
     }
   }
 
   newConsumption(): void {
     if (this.user === 'Emirates') {
-      this.postNewConsumption('20');
+      this.postNewConsumption(this.id);
     } else {
-      this.postNewConsumption('10');
+      this.postNewConsumption(this.id);
     }
     this.lastUpdate = '1. Dezember 2020';
     if (this.openConsumption <= 0) {
@@ -61,7 +63,9 @@ export class AirlineComponent implements OnInit {
     this.http
       .post('http://172.18.60.73:3000/api/Consume/', body)
       .subscribe((data) => {
+        this.con = 0;
         this.con = data;
+        console.log(this.con);
         this.totalConsumption += this.con;
         this.openConsumption -= this.totalConsumption;
       });
@@ -79,18 +83,10 @@ export class AirlineComponent implements OnInit {
       });
   }
 
-  buy(): void {
-    if (this.user === 'Emirates') {
-      this.getNewConsumption('20');
-    } else {
-      this.getNewConsumption('10');
-    }
-  }
-
   buyCertificate(value: number): void {
     const body = {
       $class: 'org.hackathon.BuyCertificates',
-      airline: 'resource:org.hackathon.Airline#10',
+      airline: 'resource:org.hackathon.Airline#' + this.id,
       stock: 'resource:org.hackathon.Stock#3',
       volume: value,
     };
@@ -105,7 +101,7 @@ export class AirlineComponent implements OnInit {
   sellCertificate(value: number): void {
     const body = {
       $class: 'org.hackathon.CellCertificates',
-      airline: 'resource:org.hackathon.Airline#10',
+      airline: 'resource:org.hackathon.Airline#' + this.id,
       stock: 'resource:org.hackathon.Stock#3',
       volume: value,
     };
