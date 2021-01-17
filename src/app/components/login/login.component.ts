@@ -27,17 +27,13 @@ export class LoginComponent {
           this.navigation.navigateTo('airline');
           this.navigation.setUser('Lufthansa');
           break;
-        case 'emirates':
-          this.navigation.navigateTo('airline');
-          this.navigation.setUser('Emirates');
-          break;
-        case 'ca':
-          this.navigation.navigateTo('ca');
-          this.navigation.setUser('EU');
-          break;
-        case 'verifier':
-          this.navigation.navigateTo('verifier');
+        case 'eex':
+          this.navigation.navigateTo('eex');
           this.navigation.setUser('EEX');
+          break;
+        case 'dehst':
+          this.navigation.navigateTo('dehst');
+          this.navigation.setUser('Deutsche Emissionshandelsstelle');
           break;
         default:
           this.setError();

@@ -15,11 +15,11 @@ const routes: Routes = [
     component: AirlineComponent,
   },
   {
-    path: 'ca',
+    path: 'dehst',
     component: CaComponent,
   },
   {
-    path: 'verifier',
+    path: 'eex',
     component: VerifierComponent,
   },
   {

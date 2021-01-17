@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { NavigateService } from 'src/app/services/navigate.service';
 import { HttpClient } from '@angular/common/http';
 import { DataService } from 'src/app/services/data.service';
 
@@ -12,10 +11,72 @@ export class CaComponent implements OnInit {
   id: string;
   sellValue: number;
   warning: string;
+  airline: string;
+  clicked = false;
+  value: number;
+  totalCert: number;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private data: DataService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.totalCert = this.data.getTotalCert();
+  }
+
+  update(): void {
+    this.warning = '';
+    this.clicked = false;
+    return;
+  }
+
+  giftC(value: number): void {
+    if (value) {
+      this.sellValue = null;
+      this.clicked = true;
+      this.giftCRest(value);
+      this.warning = 'Es wurden ' + value + ' Zertifikate vergeben.';
+      this.data.addOC(value);
+    }
+  }
+
+  sellC(value: number): void {
+    if (value) {
+      this.value = null;
+      this.clicked = true;
+      this.sellCRest(value);
+      this.warning = 'Es wurden ' + value + ' Zertifikate vergeben.';
+      this.data.addAC(value);
+    }
+  }
+
+  giftCRest(value: number): void {
+    const body = {
+      $class: 'org.hackathon.GiveCertificates4Free',
+      competentAuthority: 'resource:org.hackathon.CompetentAuthority#1',
+      airline: 'resource:org.hackathon.Airline#' + 10,
+      volume: value,
+    };
+
+    this.http
+      .post('http://172.18.60.73:3000/api/GiveCertificates4Free/', body)
+      .subscribe((data) => {
+        console.log(data);
+      });
+  }
+
+  sellCRest(value: number): void {
+    const body = {
+      $class: 'org.hackathon.GiveCertificates4Auctioning',
+      competentAuthority: 'resource:org.hackathon.CompetentAuthority#1',
+      platform: 'resource:org.hackathon.AuctionPlatform#' + 20,
+      volume: value,
+    };
+
+    this.http
+      .post('http://172.18.60.73:3000/api/GiveCertificates4Auctioning/', body)
+      .subscribe((data) => {
+        console.log(data);
+      });
+  }
 
   postCertificate(): void {
     if (this.id === 'Emirates') {

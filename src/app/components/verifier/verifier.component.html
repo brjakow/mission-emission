@@ -1,60 +1,37 @@
 <div class="container">
+  <div>
+    <h3>Anzahl der zu versteigernden Zertifikate: {{ totalConsumption }}</h3>
+  </div>
   <div class="search">
-    <h3 id="search">Suche nach einer Fluggesellschaft</h3>
+    <h3 id="search">Fluggesellschaft:</h3>
     <mat-form-field appearance="fill">
-      <mat-label>Id der Fluggesellschaft</mat-label>
-      <input matInput type="text" [(ngModel)]="id" />
+      <mat-label>Fluggesellschaft</mat-label>
+      <select matNativeControl>
+        <option value="lufthansa">Lufthansa</option>
+        <option value="emirates">Emirates</option>
+        <option value="etihad">Etihad Airways</option>
+        <option value="british">British Airways</option>
+        <option value="easyJet">EasyJet</option>
+        <option value="ryanair">Ryanair</option>
+      </select>
     </mat-form-field>
-    <button mat-raised-button color="primary" (click)="getAirlineById(id)">
-      Ausführen
-    </button>
   </div>
-  <div *ngIf="error" class="error-div">
-    <p class="error">
-      {{ error }}
-    </p>
+  <div class="search">
+    <h3 id="search">Zertifikatmenge:</h3>
+    <mat-form-field appearance="fill">
+      <mat-label>Emission in Tonnen</mat-label>
+      <input matInput type="number" [(ngModel)]="sellValue" />
+    </mat-form-field>
   </div>
-  <div>
-    <h3>
-      <span>Dieses Jahr insgesamt verbrauchter Emmision in Tonnen: : </span
-      >{{ totalConsumption }}
-    </h3>
+  <button
+    class="padding"
+    mat-raised-button
+    color="primary"
+    (click)="postCertificate(sellValue)"
+  >
+    Zertifikat austeilen
+  </button>
+  <div *ngIf="clicked" class="error-div">
+    <p class="error">{{ warning }}</p>
   </div>
-  <div>
-    <h3>
-      <span>Noch offener Emmision in Tonnen: : </span>{{ openConsumption }}
-    </h3>
-  </div>
-  <div *ngIf="verifierWarning" class="error-div">
-    <p class="error">
-      {{ verifierWarning }}
-    </p>
-  </div>
-  <mat-divider></mat-divider>
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-    <ng-container matColumnDef="airlineID">
-      <th mat-header-cell *matHeaderCellDef>Id</th>
-      <td mat-cell *matCellDef="let element">{{ element.airlineID }}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="emissionCapacity">
-      <th mat-header-cell *matHeaderCellDef>Emissionskapazität</th>
-      <td mat-cell *matCellDef="let element">{{ element.emissionCapacity }}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="emissionComsumption">
-      <th mat-header-cell *matHeaderCellDef>Emmisionsverbrauch</th>
-      <td mat-cell *matCellDef="let element">
-        {{ element.emissionComsumption }}
-      </td>
-    </ng-container>
-
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef>Name</th>
-      <td mat-cell *matCellDef="let element">{{ element.name }}</td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-  </table>
 </div>

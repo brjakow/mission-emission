@@ -35,6 +35,17 @@
             <mat-label>Emission in Tonnen</mat-label>
             <input matInput type="number" [(ngModel)]="buyValue" />
           </mat-form-field>
+          <span style="padding-right: 10px">von: </span>
+          <mat-form-field appearance="fill">
+            <mat-label>Fluggesellschaft</mat-label>
+            <select matNativeControl>
+              <option value="emirates">Emirates</option>
+              <option value="etihad">Etihad Airways</option>
+              <option value="british">British Airways</option>
+              <option value="easyJet">EasyJet</option>
+              <option value="ryanair">Ryanair</option>
+            </select>
+          </mat-form-field>
           <button
             mat-raised-button
             color="primary"
@@ -51,6 +62,17 @@
             <mat-label>Emission in Tonnen</mat-label>
             <input matInput type="number" [(ngModel)]="sellValue" />
           </mat-form-field>
+          <span style="padding-right: 10px">an: </span>
+          <mat-form-field appearance="fill">
+            <mat-label>Fluggesellschaft</mat-label>
+            <select matNativeControl>
+              <option value="emirates">Emirates</option>
+              <option value="etihad">Etihad Airways</option>
+              <option value="british">British Airways</option>
+              <option value="easyJet">EasyJet</option>
+              <option value="ryanair">Ryanair</option>
+            </select>
+          </mat-form-field>
           <button
             mat-raised-button
             color="primary"
@@ -58,6 +80,11 @@
           >
             Verkaufen
           </button>
+        </div>
+        <div *ngIf="clicked" class="error-div">
+          <p class="error">
+            {{ warning }}
+          </p>
         </div>
       </div>
     </div>

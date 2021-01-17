@@ -1,11 +1,18 @@
-<mat-tab-group>
-  <mat-tab label="Zertifikatsvergabe">
+<mat-tab-group (selectedTabChange)="update()">
+  <mat-tab label="Kostenlose Zertifikatvergabe">
     <div class="container">
       <div class="search">
         <h3 id="search">Fluggesellschaft:</h3>
         <mat-form-field appearance="fill">
-          <mat-label>Name</mat-label>
-          <input matInput type="string" [(ngModel)]="id" />
+          <mat-label>Fluggesellschaft</mat-label>
+          <select matNativeControl>
+            <option value="lufthansa">Lufthansa</option>
+            <option value="emirates">Emirates</option>
+            <option value="etihad">Etihad Airways</option>
+            <option value="british">British Airways</option>
+            <option value="easyJet">EasyJet</option>
+            <option value="ryanair">Ryanair</option>
+          </select>
         </mat-form-field>
       </div>
       <div class="search">
@@ -19,12 +26,45 @@
         class="padding"
         mat-raised-button
         color="primary"
-        (click)="postCertificate()"
+        (click)="giftC(sellValue)"
       >
         Zertifikat austeilen
       </button>
-
-      <div *ngIf="warning" class="error-div">
+      <div *ngIf="clicked" class="error-div">
+        <p class="error">
+          {{ warning }}
+        </p>
+      </div>
+    </div>
+  </mat-tab>
+  <mat-tab label="Zertifikatvergabe für Auktion">
+    <div class="container">
+      <div class="search">
+        <h3 id="search">Auktionsplattform:</h3>
+        <mat-form-field appearance="fill">
+          <mat-label>Auktionsplattform</mat-label>
+          <select matNativeControl>
+            <option value="eex">EEX</option>
+            <option value="ice">ICE</option>
+          </select>
+        </mat-form-field>
+      </div>
+      <div class="search">
+        <h3 id="search">Zertifikatmenge:</h3>
+        <mat-form-field appearance="fill">
+          <mat-label>Emission in Tonnen</mat-label>
+          <input matInput type="number" [(ngModel)]="value" />
+        </mat-form-field>
+      </div>
+      <button
+        class="padding"
+        mat-raised-button
+        color="primary"
+        (click)="sellC(value)"
+      >
+        Zertifikat austeilen
+      </button>
+      <div *ngIf="clicked" class="error-div">
         <p class="error">
           {{ warning }}
         </p>
@@ -34,19 +74,42 @@
   <mat-tab label="Jahresabschluss">
     <div class="container">
       <div class="search">
-        <h3 id="search">Emissionen geprüft</h3>
+        <h3 id="search">Fluggesellschaft:</h3>
+        <mat-form-field appearance="fill">
+          <mat-label>Fluggesellschaft</mat-label>
+          <select matNativeControl [(ngModel)]="airline">
+            <option value="lufthansa">Lufthansa</option>
+            <option value="emirates">Emirates</option>
+            <option value="etihad">Etihad Airways</option>
+            <option value="british">British Airways</option>
+            <option value="easyJet">EasyJet</option>
+            <option value="ryanair">Ryanair</option>
+          </select>
+        </mat-form-field>
       </div>
-      <div class="search">
-        <h3 id="search">Jahresabschluss vornehmen</h3>
+
+      <div *ngIf="airline" class="search">
+        <h3>Zertifikatsmenge:</h3>
+        <h3>{{ totalCert }}</h3>
       </div>
-      <button
-        class="padding"
-        mat-raised-button
-        color="primary"
-        (click)="approve()"
-      >
-        Bestätigen
-      </button>
+      <div *ngIf="airline" class="search">
+        <h3 id="search">Verifizierte Emissionen:</h3>
+        <mat-form-field appearance="fill">
+          <mat-label>Emission in Tonnen</mat-label>
+          <input matInput type="number" [(ngModel)]="sellValue" />
+        </mat-form-field>
+        <button
+          *ngIf="airline"
+          mat-raised-button
+          color="primary"
+          (click)="giftC(sellValue)"
+        >
+          Bestätigen
+        </button>
+      </div>
+      <div *ngIf="clicked" class="error-div">
+        <p class="error">Die Emmisionen sind regelkonform gedeckt.</p>
+      </div>
     </div>
   </mat-tab>
 </mat-tab-group>
